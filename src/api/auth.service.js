@@ -24,23 +24,13 @@ axios.interceptors.response.use(
       response.config.method === 'patch' &&
       response.status === 200) {
         alert('Profile was changed')
-      // toast.success('Profile changed', {
-      //   position: "top-center",
-      //   autoClose: 5000,
-      //   hideProgressBar: false,
-      //   transition: Slide,
-      // });
+      
     }
 
     return response;
   },
   function (error) {
-    // toast.error(error.response.data, {
-    //   position: "top-center",
-    //   autoClose: 5000,
-    //   hideProgressBar: false,
-    //   transition: Slide,
-    // });
+    
     if (error.response.status === 401 || error.response.status === 400) {
       console.log(error.response.status)
       store.dispatch(logoutThunk());
