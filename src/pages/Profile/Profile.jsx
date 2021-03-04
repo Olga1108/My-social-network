@@ -92,7 +92,7 @@ const Profile = () => {
               className="btn-profile"
               handleClick={handleClick}
             >
-              {isFollow ? "UnFollow" : "Follow"}
+              {isFollow ? "Unfollow" : "Follow"}
             </ToggleButton>
             }
 

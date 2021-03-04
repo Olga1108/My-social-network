@@ -17,7 +17,9 @@ const createInitialState = () => {
     },
     // isFetching: true,
     post: {},
-    feed: []
+    feed: [],
+    comments: [],
+    errorMessage: ''
   }
 };
 
@@ -86,6 +88,12 @@ const usersReducer = (state = createInitialState(), action) => {
       return {
         ...state,
         comments: action.payload
+      };
+
+      case ActionTypes.SEND_ERROR:
+      return {
+        ...state,
+        errorMessage: action.payload
       };
 
     default:

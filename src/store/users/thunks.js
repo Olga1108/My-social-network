@@ -13,7 +13,9 @@ import {
   likePostFetch,
   createCommentFetch,
   getCommentPostFetch,
-  // updateCommentFetch
+  
+  updateCommentFetch,
+  deleteCommentFetch
 } from '../../api/users.service';
 import {
   loginAction,
@@ -24,7 +26,8 @@ import {
   getUserByIdAction,
   getPostByIdAction,
   getFeedAction,
-  
+  getCommentsByPostIdAction,
+  sendErrorAction
 } from './actions';
 
 
@@ -45,6 +48,19 @@ export const loginThunk = (userData) => {
       dispatch(getCurrentUserThunk())
       dispatch(loginAction(access_token))
     } catch (error) { }
+  }
+}
+
+export const initThunk = () => {
+  return async (dispatch) => {
+    try {
+      const token = localStorage.getItem('access_token');
+      if (!token) {
+        return dispatch(logoutThunk())
+      }
+      dispatch(loginAction(token))
+      dispatch(getCurrentUserThunk())
+    } catch (e) { sendErrorAction(e.message) }
   }
 }
 
@@ -146,38 +162,59 @@ export const likePostThunk = (postId) => {
   }
 }
 
-export const createCommentThunk = (postId) => {
+export const createCommentThunk = (userData) => {
   return async (dispatch) => {
-    await createCommentFetch();
-    dispatch(getPostByIdThunk(postId))
-  }
-}
-
-export const getCommentsPostThunk = (postId) => {
-  return async (dispatch) => {
-    await getCommentPostFetch(postId);
-    dispatch(getFeedThunk());
-    dispatch(getPostByIdThunk(postId))
-  }
-}
-
-// export const updateCommentThunk = (commentId) => {
-//   return async (dispatch) => {
-//    await updateCommentFetch(commentId);
-//    dispatch(getPostByIdThunk(postId))
-      
-//   }
-// }
-
-export const initThunk = () => {
-  return async (dispatch) => {
-    try {
+    try{
       const token = localStorage.getItem('access_token');
-      if (!token) {
-        return dispatch(logoutThunk())
-      }
-      dispatch(loginAction(token))
-      dispatch(getCurrentUserThunk())
-    } catch (e) { }
+      await createCommentFetch(userData, token);
+    }
+  catch(e){
+    dispatch(sendErrorAction(e.message))
+    }
   }
 }
+
+export const getCommentsPostThunk = id => {
+  return async (dispatch) => {
+    try{
+      const token = localStorage.getItem('access_token');
+      const comments = await getCommentPostFetch(id, token);
+      dispatch(getCommentsByPostIdAction(comments))
+    }
+    catch(e){
+      dispatch(sendErrorAction(e.message))
+    } 
+  }
+}
+
+export const updateCommentThunk = (id, userData) => {
+  return async (dispatch) => {
+    try{
+      const token = localStorage.getItem('access_token');
+      await updateCommentFetch(id, userData, token);
+    }
+    catch(e) {
+      dispatch(sendErrorAction(e.message))
+    }
+  }
+}
+
+export const deleteCommentThunk = (id) => {
+  return async (dispatch) => {
+    try{
+      const token = localStorage.getItem('access_token');
+      await deleteCommentFetch(id, token);
+    }
+    catch(e) {
+      dispatch(sendErrorAction(e.message))
+    }
+  }
+}
+
+export const clearErrorThunk = () => {
+  return async (dispatch) => {
+    dispatch(sendErrorAction(''))
+  }
+}
+
+

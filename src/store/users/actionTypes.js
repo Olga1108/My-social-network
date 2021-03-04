@@ -8,7 +8,8 @@ const userActionTypes = {
     LOADING_FETCHING: 'LOADING_FETCHING',
     GET_POST_BY_ID: 'GET_POST_BY_ID',
     GET_FEED: 'GET_FEED',
-    GET_COMMENTS_BY_POST_ID: 'GET_COMMENTS_BY_POST_ID'
+    GET_COMMENTS_BY_POST_ID: 'GET_COMMENTS_BY_POST_ID',
+    SEND_ERROR: 'SEND_ERROR'
   }
 
   export default userActionTypes;

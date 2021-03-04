@@ -18,3 +18,5 @@ export const getPostByIdStateSelector = state => usersStateSelector(state).post;
 export const getFeedStateSelector = state => usersStateSelector(state).feed;
 
 export const getCommentsByPostIdSelector = state => usersStateSelector(state).comments;
+
+export const getErrorMessageSelector = state => usersStateSelector(state).errorMessage;

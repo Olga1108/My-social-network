@@ -1,6 +1,5 @@
 import styled from 'styled-components';
-// import breakpoint from 'styled-components-breakpoint';
-import final from '../../images/final.png';
+
 import {breakpoint} from '../../constants/breakpoints';
 
 
@@ -10,7 +9,7 @@ export const ImgWrapper = styled.div`
 
   ${breakpoint('xl')`
   width: 40%;    
-    background-image: url('https://images.unsplash.com/photo-1573068674916-8ec01771bfbd?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=1000&q=80');
+    background-image: url('../../images/final.png');
     background-repeat: no-repeat;
     background-size: cover;
     background-position: center;

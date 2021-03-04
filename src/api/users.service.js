@@ -60,17 +60,22 @@ export const getFollowersFollowingsUserByIdFetch = async userId => {
   return data;
 }
 
-export const getCommentPostFetch = async postId => {
-  const { data } = await axios.get('/comments/' + postId);
+export const getCommentPostFetch = async (id, token) => {
+  const { data } = await axios.get('/comments/' + id, {headers: {Authorization: token}});
   return data;
 }
 
-export const createCommentFetch = async () => {
-  const { data } = await axios.post('/comments');
+export const createCommentFetch = async (userData, token) => {
+   const { data } = await axios.post('/comments', userData, {headers: {Authorization: token}});
+   return data;
+}
+
+export const updateCommentFetch = async (id, userdData, token) => {
+  const { data } = await axios.patch('/comments/' + id, {text: userdData}, {headers: {Authorization: token}});
   return data;
 }
 
-export const updateCommentFetch = async commentId => {
-  const { data } = await axios.patch('/comments/' + commentId);
+export const deleteCommentFetch = async (id, token) => {
+  const { data } = await axios.delete('/comments/' + id, {headers: {Authorization: token}});
   return data;
 }

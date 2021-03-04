@@ -68,3 +68,10 @@ export const getCommentsByPostIdAction = comments => {
     payload: comments
   }
 }
+
+export const sendErrorAction = error => {
+  return {
+    type: ActionTypes.SEND_ERROR,
+    payload: error
+  }
+}

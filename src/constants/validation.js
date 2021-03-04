@@ -65,6 +65,17 @@ export const loginErrors = {
       message: 'Name can include large and small latin letters'
     }
   }
+
+  export const commentErrors = {
+    required: {
+      value: true,
+      message: 'Field shouldn\'t be empty. Type something'
+    },
+    maxLength: {
+      value: 100,
+      message: 'Comment should include no more than 100 letters'
+    }
+  }
   
   export const imgErrors = (isRequired = true) => {
     return {
@@ -78,4 +89,6 @@ export const loginErrors = {
         message: 'Type of image must be jpg, jpeg or png'
       }
     }
+
+  
   }

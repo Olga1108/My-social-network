@@ -96,6 +96,9 @@ export const UserAboutStyle = styled.div`
 
 export const MessagesStyle = styled.div`
   flex-grow: 1;
+  overflow: scroll;
+  height: 100%;
+  overflow-x: hidden;
 `;
 
 export const ButtonStyle = styled.button.attrs({
@@ -107,11 +110,7 @@ export const ButtonStyle = styled.button.attrs({
   background: none;
   `;
 
-export const FormMessage = styled.form`
-  display: flex;
-  align-items: center;
-  padding-right: 5px 10px 5px 0;
-`;
+
 
 export const PopupCloserStyle = styled.span`
   position: absolute;
@@ -129,3 +128,44 @@ export const PopupCloserStyle = styled.span`
     text-decoration: none;
   }
 `;
+export const FormMessage = styled.form`
+  display: flex;
+  align-items: center;
+  padding-right: 5px 10px 5px 0;
+  .sendInput{
+          padding: 14px;
+          border: 0;
+          outline: none;
+      }
+`;
+
+export const SendLinkWrapperStyle = styled.div`
+display: flex;
+     
+     
+      .sendIcon{
+          margin: 0 5px;
+          width: 17px;
+      }
+
+
+`;
+
+export const SettingsWrapperStyle = styled.div`
+    display: flex;
+    justify-content: center;
+     .update{
+        margin: 0 5px;
+        display: flex;
+        justify-content: center;
+    }
+`;
+
+export const CommentWrapperStyle = styled.div`
+    .comment{
+      display: flex;
+      align-items: flex-start;
+      margin: 15px;
+    }
+`;
+

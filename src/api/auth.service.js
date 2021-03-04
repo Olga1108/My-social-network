@@ -1,6 +1,4 @@
 import axios from './axios.instance';
-
-
 import store from '../store/store';
 import { logoutThunk } from '../store/users/thunks';
 
