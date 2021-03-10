@@ -1,8 +1,8 @@
 import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { NavLink } from 'react-router-dom';
-import { logoutThunk, getUsersByLoginThunk } from '../../store/users/thunks';
-import { getUserByIdStateSelector, getUsersStateSelector } from '../../store/users/selectors';
+import { logoutThunk, getUsersByLoginThunk, deleteUserThunk } from '../../store/users/thunks';
+import { getUserByIdStateSelector, getUsersStateSelector, getCurrentUserSelector } from '../../store/users/selectors';
 import Input from '../../components/Input';
 import { Wrapper } from '../Wrapper/Wrapper';
 import { StyleHeader, StyleHeaderContainer, FieldSearch, StyleHeaderTitle, Navbar } from './styled';
@@ -19,6 +19,7 @@ const Header = ({ users, title }) => {
   const dispatch = useDispatch();
   const { login } = useSelector(getUserByIdStateSelector);
   const usersList = useSelector(getUsersStateSelector);
+  const currentUserId = useSelector(getCurrentUserSelector)
 
   const searchUsersByLogin = userLogin => {
     const handler = setTimeout(() => {
@@ -28,6 +29,10 @@ const Header = ({ users, title }) => {
     return () => {
       clearTimeout(handler)
     };
+  }
+
+  const deleteUser = () => {
+    dispatch(deleteUserThunk(currentUserId.id))
   }
 
   return (
@@ -80,6 +85,7 @@ const Header = ({ users, title }) => {
                 <ILogout className="icon" />
               </button>
             </li>
+            <li onClick={deleteUser}>Delete Profile</li>
           </Navbar>
         </StyleHeaderContainer>
       </Wrapper>

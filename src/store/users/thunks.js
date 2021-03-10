@@ -13,7 +13,7 @@ import {
   likePostFetch,
   createCommentFetch,
   getCommentPostFetch,
-  
+  deleteUserFetch,
   updateCommentFetch,
   deleteCommentFetch
 } from '../../api/users.service';
@@ -204,6 +204,18 @@ export const deleteCommentThunk = (id) => {
     try{
       const token = localStorage.getItem('access_token');
       await deleteCommentFetch(id, token);
+    }
+    catch(e) {
+      dispatch(sendErrorAction(e.message))
+    }
+  }
+}
+
+export const deleteUserThunk = (id) => {
+  return async (dispatch) => {
+    try{
+      await deleteUserFetch(id);
+      dispatch(logoutAction())
     }
     catch(e) {
       dispatch(sendErrorAction(e.message))

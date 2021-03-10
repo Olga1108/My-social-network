@@ -79,3 +79,8 @@ export const deleteCommentFetch = async (id, token) => {
   const { data } = await axios.delete('/comments/' + id, {headers: {Authorization: token}});
   return data;
 }
+
+export const deleteUserFetch = async (id) => {
+  const { data } = await axios.delete('/users/' + id);
+  return data;
+}

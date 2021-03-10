@@ -7,7 +7,7 @@ import { ReactComponent as NoImg } from '../../images/icons/avatar.svg';
 import PenIcon from '../../images/icons/pen.svg';
 import CloseIcon from '../../images/icons/close.gif';
 import { hidePopup } from '../../store/popup/actions';
-import { getUserByIdThunk } from '../../store/users/thunks';
+import { getUserByIdThunk, getUsersThunk } from '../../store/users/thunks';
 import { createCommentThunk, getCommentsPostThunk, updateCommentThunk, deleteCommentThunk } from '../../store/users/thunks';
 import { getPostByIdStateSelector, getUserByIdStateSelector, getCommentsByPostIdSelector, getCurrentUserSelector } from '../../store/users/selectors';
 
@@ -26,6 +26,7 @@ const usePopup = () => {
   useEffect(() => {
     if (post.ownerId) {
       dispatch(getUserByIdThunk(post.ownerId));
+      dispatch(getUsersThunk())
       dispatch(getCommentsPostThunk(post._id))
     }
   }, [post.ownerId, post._id, dispatch])
@@ -50,8 +51,9 @@ const Popup = () => {
     e.preventDefault();
    
     await dispatch(createCommentThunk({postId: post._id, text: commentRef.current.value}))
-     dispatch(getCommentsPostThunk(post._id))
     commentRef.current.value = ''
+     dispatch(getCommentsPostThunk(post._id))
+    
 }
 
 const updateCommentLable = (e) =>{
@@ -103,7 +105,7 @@ const deleteCommentLable = async (e) =>{
 
             <MessagesStyle>
               {
-                comments && comments.map((e) =>{
+                 comments.map((e) =>{
                             console.log(e.isEdited)
                             return(
                             <CommentWrapperStyle key={e.id}>
